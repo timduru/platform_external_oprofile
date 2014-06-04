@@ -206,14 +206,14 @@ int setup_device(void)
 {
     if (mkdir(OP_DRIVER_BASE, 0755)) {
         if (errno != EEXIST) {
-            fprintf(stderr, "Cannot create directory "OP_DRIVER_BASE": %s\n",
+            fprintf(stderr, "Cannot create directory " OP_DRIVER_BASE": %s\n",
                     strerror(errno));
             return -1;
         }
     }
 
     if (access(OP_DRIVER_BASE"/stats", F_OK)) {
-        if (system("mount -t oprofilefs nodev "OP_DRIVER_BASE)) {
+        if (system("mount -t oprofilefs nodev " OP_DRIVER_BASE)) {
             return -1;
         }
     }
@@ -261,7 +261,7 @@ int setup_device(void)
 void setup_session_dir()
 {
     if (access(OP_DATA_DIR, F_OK) == 0)
-        system("rm -r "OP_DATA_DIR);
+        system("rm -r " OP_DATA_DIR);
 
     if (mkdir(OP_DATA_DIR, 0755)) {
         fprintf(stderr, "Cannot create directory \"%s\": %s\n",
@@ -674,7 +674,7 @@ int main(int argc, char * const argv[])
 
         strcpy(command, argv[0]);
         char* slash = strrchr(command, '/');
-        strcpy(slash ? slash + 1 : command, "oprofiled --session-dir="OP_DATA_DIR);
+        strcpy(slash ? slash + 1 : command, "oprofiled --session-dir=" OP_DATA_DIR);
 
 #if defined(__arm__) && !defined(WITH_ARM_V7_A)
         /* Since counter #3 can only handle CPU_CYCLES, check and shuffle the 
